@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignCraft AI | Custom Event Signs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8A704C;
+            --primary-light: #8A704C;
+            --secondary: #da9c56;
+            --accent: #FFB800;
+            --dark: #1A1A2E;
+            --light: #F8F9FC;
+            --gray: #6C757D;
+            --gray-light: #E9ECEF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-cta {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .nav-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+            color: white;
+        }
+        
+        .nav-cta::after {
+            display: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(135deg, rgba(94, 23, 235, 0.05) 0%, rgba(255, 77, 148, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .hero-text {
+            flex: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero-heading {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-heading span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-subheading {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(94, 23, 235, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--gray-light);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .sign-mockup {
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sign-content {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #FFB8D9, #C9B6FF);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .sign-content h3 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .sign-content p {
+            font-size: 1.2rem;
+            max-width: 300px;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .step {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(94, 23, 235, 0.1), rgba(255, 77, 148, 0.1));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: var(--primary);
+        }
+        
+        .step-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .step-description {
+            color: var(--gray);
+        }
+        
+        /* Sign Designer Preview */
+        .sign-designer {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(94, 23, 235, 0.03) 0%, rgba(255, 77, 148, 0.03) 100%);
+        }
+        
+        .designer-container {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .designer-demo {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .designer-controls {
+            padding: 20px;
+            background: var(--light);
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .designer-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .designer-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .designer-preview {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-content {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .preview-content h3 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .preview-content p {
+            color: var(--gray);
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05) 10px, transparent 10px, transparent 20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .designer-info {
+            flex: 1;
+        }
+        
+        .designer-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .designer-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .designer-features li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        /* Use Cases */
+        .use-cases {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .category {
+            background: var(--light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-image {
+            height: 200px;
+            background: linear-gradient(45deg, #5E17EB, #FF4D94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .category-content {
+            padding: 20px;
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .category-description {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        .category-cta {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: gap 0.3s;
+        }
+        
+        .category-cta:hover {
+            gap: 10px;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(94, 23, 235, 0.03) 0%, rgba(255, 77, 148, 0.03) 100%);
+        }
+        
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+        
+        .pricing-plan {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .plan-price {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: var(--dark);
+        }
+        
+        .plan-price span {
+            font-size: 1.5rem;
+            color: var(--gray);
+        }
+        
+        .plan-features {
+            list-style: none;
+            margin: 30px 0;
+        }
+        
+        .plan-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .testimonial-container {
+            position: relative;
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .testimonial {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            margin: 0 20px;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ */
+        .faq {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(94, 23, 235, 0.03) 0%, rgba(255, 77, 148, 0.03) 100%);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto 0;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--gray);
+            display: none;
+        }
+        
+        .faq-active .faq-answer {
+            display: block;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-heading {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .cta-btn {
+            background: white;
+            color: var(--primary);
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .cta-btn:hover {
+            background: var(--light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-col p {
+            margin-bottom: 20px;
+            color: #B8B8B8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #B8B8B8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #B8B8B8;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                margin-bottom: 40px;
+            }
+            
+            .hero-cta {
+                justify-content: center;
+            }
+            
+            .designer-container {
+                flex-direction: column;
+            }
+            
+            .designer-info {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img style="height: 70px;" src="logo.png" alt="">
+                <!-- <div class="logo-img">SC</div> -->
+                <!-- <div class="logo-text">SignCraft AI</div> -->
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#designer">Designer</a></li>
+                    <li><a href="#use-cases">Use Cases</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#" class="nav-cta">Get Started</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1 class="hero-heading">Create Custom <span>Event Signs</span> with AI</h1>
+                <p class="hero-subheading">Transform your event with beautiful, personalized signage generated by artificial intelligence. Perfect for any occasion.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-primary"><i class="fas fa-magic"></i> Design Your Sign</a>
+                    <a href="#" class="btn btn-secondary"><i class="fas fa-play-circle"></i> How It Works</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="sign-mockup">
+                    <div class="sign-content">
+                        <h3>Happy Birthday!</h3>
+                        <p>Celebrating 60 years with joy and laughter</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-heading">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Creating your custom event sign is simple and hassle-free with our AI-powered platform</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3 class="step-title">Describe Your Event</h3>
+                    <p class="step-description">Tell us about your event or upload photos. Our AI will understand your vision.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="step-title">AI Generates Design</h3>
+                    <p class="step-description">Our AI creates beautiful sign previews with watermark for your review.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3 class="step-title">Checkout & Pay</h3>
+                    <p class="step-description">Securely pay $25 via Stripe to unlock the high-resolution design.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="step-title">We Deliver</h3>
+                    <p class="step-description">We print your sign and deliver it to your doorstep or prepare for pickup.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sign Designer Preview -->
+    <section class="sign-designer" id="designer">
+        <div class="container designer-container">
+            <div class="designer-demo">
+                <div class="designer-controls">
+                    <input type="text" class="designer-input" placeholder="Describe your sign (e.g., Happy 60th birthday, pink and gold, with roses)">
+                </div>
+                <div class="designer-preview">
+                    <div class="preview-content">
+                        <h3>Happy 60th Birthday!</h3>
+                        <p>Elegant pink and gold design with rose accents</p>
+                    </div>
+                    <div class="watermark">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="designer-info">
+                <h2 class="designer-title">AI-Powered Sign Designer</h2>
+                <p>Our advanced AI technology transforms your description into a beautiful, professional event sign in seconds. Simply tell us what you need, and watch the magic happen.</p>
+                <ul class="designer-features">
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>Instant design generation based on your description</div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div>Upload your own photos and logos to include in the design</div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-pen"></i>
+                        </div>
+                        <div>Customize colors, text, and layout to your preference</div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>Watermarked preview until payment is completed</div>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-primary"><i class="fas fa-play"></i> Try Designer Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <div class="section-heading">
+                <h2 class="section-title">Perfect For Any Occasion</h2>
+                <p class="section-subtitle">From personal celebrations to professional events, our custom signs make every moment special</p>
+            </div>
+            <div class="categories">
+                <div class="category">
+                    <div class="category-image">
+                        <i class="fas fa-birthday-cake"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Birthdays & Anniversaries</h3>
+                        <p class="category-description">Celebrate milestone birthdays and anniversaries with personalized signs.</p>
+                        <a href="#" class="category-cta">View Examples <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <i class="fas fa-ring"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Weddings & Engagements</h3>
+                        <p class="category-description">Elegant signage for your special day, from welcome signs to table numbers.</p>
+                        <a href="#" class="category-cta">View Examples <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Graduations & Retirements</h3>
+                        <p class="category-description">Celebrate academic achievements and career milestones with custom signs.</p>
+                        <a href="#" class="category-cta">View Examples <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Baby Showers & Gender Reveals</h3>
+                        <p class="category-description">Adorable signage for welcoming new additions to the family.</p>
+                        <a href="#" class="category-cta">View Examples <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Trade Shows & Grand Openings</h3>
+                        <p class="category-description">Professional signage that makes your business stand out from the crowd.</p>
+                        <a href="#" class="category-cta">View Examples <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="category-image">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="category-content">
+                        <h3 class="category-title">Food Trucks & Restaurants</h3>
+                        <p class="category-description">Menu boards, daily specials, and promotional signage for food businesses.</p>
+                        <a href="#" class="category-cta">View Examples <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-heading">
+                <h2 class="section-title">Simple & Transparent Pricing</h2>
+                <p class="section-subtitle">One flat rate for beautiful, custom event signs with no hidden fees</p>
+            </div>
+            <div class="pricing-container">
+                <div class="pricing-plan">
+                    <div class="plan-badge">Most Popular</div>
+                    <h3>Standard Sign Rental</h3>
+                    <div class="plan-price">$25<span>/sign</span></div>
+                    <p>Perfect for most events and occasions</p>
+                    <ul class="plan-features">
+                        <li>AI-generated custom design</li>
+                        <li>Full-color high-quality print</li>
+                        <li>24" x 36" standard size</li>
+                        <li>Waterproof and durable material</li>
+                        <li>Rental period of 3 days</li>
+                        <li>Delivery or pickup options</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-heading">
+                <h2 class="section-title">What Our Customers Say</h2>
+                <p class="section-subtitle">Don't just take our word for it - hear from our satisfied customers</p>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial">
+                    <p class="testimonial-content">"The AI designer created exactly what I envisioned for my mother's 60th birthday. The sign was beautiful and received so many compliments. The process was incredibly easy!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">S</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Birthday Event</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-heading">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <p class="section-subtitle">Find answers to common questions about our sign rental service</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is the sign a rental or purchase? <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        Our service is a rental. You pay for the design and rental period (typically 3 days). After your event, we either collect the sign or you can return it to us. This eco-friendly approach helps reduce waste and keeps costs affordable.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I upload my own photos? <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! Our AI designer allows you to upload photos and logos to incorporate into your sign design. The AI will seamlessly blend your images with the generated design for a personalized result.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long is the rental period? <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        The standard rental period is 3 days, which covers setup, event day, and takedown. If you need the sign for a longer period, we offer extended rental options at checkout.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you deliver? <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer delivery within a 25-mile radius of our location for a small fee. Outside that area, additional delivery charges may apply. You can also choose to pick up your sign from our studio at no cost.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-heading">Ready to Create Your Custom Sign?</h2>
+            <p class="cta-text">Join thousands of satisfied customers who have transformed their events with our AI-powered custom signs. Get started in minutes!</p>
+            <a href="#" class="btn cta-btn"><i class="fas fa-magic"></i> Design Your Sign Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <img style="height: 65px;" src="logo 2.png" alt="">
+                    <div style="margin-top: 20px;"></div>
+                    <!-- <h4>SignCraft AI</h4> -->
+                    <p>Transforming events with AI-powered custom signage. Beautiful, affordable, and eco-friendly rental solutions for all your special occasions.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#designer">Sign Designer</a></li>
+                        <li><a href="#use-cases">Use Cases</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Birthday Signs</a></li>
+                        <li><a href="#">Wedding Signs</a></li>
+                        <li><a href="#">Graduation Signs</a></li>
+                        <li><a href="#">Business Signs</a></li>
+                        <li><a href="#">Menu Boards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Design Street, Creative City</li>
+                        <li><i class="fas fa-phone"></i> (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> hello@signcraftai.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SignCraft AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('faq-active');
+            });
+        });
+
+        // Simple animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.step, .category, .pricing-plan').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
